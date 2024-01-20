@@ -1,0 +1,150 @@
+version: 2
+
+sources:
+  - name: lineagedemo
+    description: "To load data into deltalake tables form amazon s3"
+
+    tables:
+        - name: jaffle_shop_customers
+          meta:
+              owner: "ayan.krumeich@dynatrace.com"
+              model_maturity: in prod
+          description: "deltalake table which stores the customers details"
+          columns:
+          - name: ID
+            data_type: int
+            description: "Customer Id"
+            tests:
+              - unique
+              - not_null
+          - name: First_Name
+            data_type: Varchar(100)
+            description: "Customer fisrt Name"
+          - name: Last_Name
+            data_type: Varchar(100)
+            description: "Customer Last Name"
+            
+        - name: jaffle_shop_orders
+          meta:
+              owner: "tarun.udab@dynatrace.com"
+              model_maturity: in prod
+          description: "deltalake table which stores the order details"                     
+          columns:
+          - name: ID
+            data_type: int
+            description: "order Id"
+            tests:
+              - unique
+              - not_null
+          - name: USER_ID
+            data_type: int
+            description: "Customer ID"
+            tests:
+              - not_null
+          - name: ORDER_DATE
+            data_type: DATE
+            description: "Date on which order is placed"
+          - name: STATUS
+            data_type: varchar(100)
+            description: "status of the order"
+            tests:
+              - not_null
+          - name: ETL_LOADED_AT
+            data_type: datetime
+            description: "time on which ETL loaded"
+
+        - name: jaffle_shop_payments
+          meta:
+              owner: "keethi.thsus@dynatrace.com"
+              model_maturity: in prod
+          description: "deltalake table which stores the Payment details"    
+          columns:
+          - name: ID
+            data_type: int
+            description: "payment Id"
+            tests:
+              - not_null
+          - name: ORDERID
+            data_type: int
+            description: "order id"
+          - name: PAYMENTMETHOD
+            data_type: Varchar(1000)
+            description: "METHOD of PAYMENT"
+          - name: STATUS
+            data_type: varchar(1000)
+            description: "status of the payment"
+          - name: AMOUNT
+            data_type: NUMBER(38,0)
+            description: "total Payment amount"
+          - name: CREATED
+            data_type: date
+            description: "Date on which payment is made for the order"
+          - name: _BATCHED_AT
+            data_type: datetime
+            description: "entry time"
+        - name: airline_codes
+          meta:
+              owner: "keet.ths@dynatrace.com"
+              model_maturity: in prod
+          description: "deltalake table which stores the airline details"    
+          columns:
+          - name: iata
+            data_type: string
+            description: "iata"
+            tests:
+              - not_null
+          - name: name
+            data_type: string
+            description: "name"
+          
+        - name: airline_trips_bronze
+          meta:
+              owner: "keethi.thsus@dynatrace.com"
+              model_maturity: in prod
+          description: "deltalake table which stores the Payment details"    
+          columns:
+          - name: ActualElapsedTime
+            data_type: string
+            description: "ActualElapsedTime"
+          - name: ArrDelay
+            data_type: string
+            description: "ArrDelay"
+          - name: CRSArrTime
+            data_type: Varchar(1000)
+            description: "CRSArrTime"
+          - name: CRSDepTime
+            data_type: varchar(1000)
+            description: "CRSDepTime"
+          - name: CRSElapsedTime
+            data_type: NUMBER(38,0)
+            description: "CRSElapsedTime"
+          - name: Cancelled
+            data_type: date
+            description: "Cancelled"
+          - name: ArrDate
+            data_type: datetime
+            description: "ArrDate"
+          - name: ArrTimestamp
+            data_type : string
+            description : "ArrTimestamp"
+        - name: airport_codes
+          meta:
+              owner: "keethi.thsus@dynatrace.com"
+              model_maturity: in prod
+          description: "deltalake table which stores the airport_codes details"    
+          columns:
+          - name: iata_code
+            data_type: int
+            description: "iata_code"
+          - name: municipality
+            data_type: int
+            description: "municipality"
+          - name: name
+            data_type: Varchar(1000)
+            description: "name"
+          - name: elevation_ft
+            data_type: varchar(1000)
+            description: "elevation_ft"
+          - name: coordinates
+            data_type: NUMBER(38,0)
+            description: "coordinates"
